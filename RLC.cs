@@ -20,7 +20,6 @@ namespace RLC
         public bool Measure(double Current_Time, Target target)
         {
             this.Current_Time = Current_Time;
-            //Данная СК имеет инвертированную ось OY
 
             Az = target.Current_Position.X == Current_Position.X
 
