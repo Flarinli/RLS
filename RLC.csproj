@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OnMyEventDelegate.cs" />
+    <Compile Include="Type.cs" />
     <Compile Include="Integrator.cs" />
     <Compile Include="IIntegrator.cs" />
     <Compile Include="Point.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="RightValue.cs" />
     <Compile Include="RLC_Form.cs">
       <SubType>Form</SubType>
@@ -58,6 +61,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Target.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
