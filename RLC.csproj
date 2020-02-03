@@ -49,6 +49,7 @@
     <Compile Include="Aircraft.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="OnMyEventDelegate.cs" />
+    <Compile Include="RLC.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Integrator.cs" />
     <Compile Include="IIntegrator.cs" />

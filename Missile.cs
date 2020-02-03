@@ -2,7 +2,7 @@
 
 namespace RLC
 {
-    class Missile : Target
+    public class Missile : Target
     {
         public Missile(double x0,
                        double y0,

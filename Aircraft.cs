@@ -2,7 +2,7 @@
 
 namespace RLC
 {
-    class Aircraft : Target
+    public class Aircraft : Target
     {
         public Aircraft(double x0,
                         double y0,
