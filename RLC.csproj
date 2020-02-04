@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
+    <Compile Include="CommandPost.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="OnMyEventDelegate.cs" />
     <Compile Include="RLC.cs" />

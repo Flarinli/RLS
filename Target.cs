@@ -18,6 +18,7 @@ namespace RLC
         protected Type flObj = Type.None;
 
         public RightValue[] rightValues;
+        public bool b { get; set; }
         public Target(double x0,
                       double y0,
                       double course,
