@@ -48,10 +48,12 @@
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
     <Compile Include="CommandPost.cs" />
+    <Compile Include="Convertion.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="OnMyEventDelegate.cs" />
     <Compile Include="RLC.cs" />
     <Compile Include="SAMMissile.cs" />
+    <Compile Include="Simulator.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Integrator.cs" />
     <Compile Include="IIntegrator.cs" />
@@ -76,6 +78,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RLC_Form.resx">
+      <DependentUpon>RLC_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
