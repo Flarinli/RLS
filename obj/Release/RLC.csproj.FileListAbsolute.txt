@@ -1,0 +1,9 @@
+C:\Users\maxim\source\repos\RLC\bin\Release\RLC.exe.config
+C:\Users\maxim\source\repos\RLC\bin\Release\RLC.exe
+C:\Users\maxim\source\repos\RLC\bin\Release\RLC.pdb
+C:\Users\maxim\source\repos\RLC\obj\Release\RLC.csprojAssemblyReference.cache
+C:\Users\maxim\source\repos\RLC\obj\Release\RLC.Properties.Resources.resources
+C:\Users\maxim\source\repos\RLC\obj\Release\RLC.RLC_Form.resources
+C:\Users\maxim\source\repos\RLC\obj\Release\RLC.csproj.GenerateResource.cache
+C:\Users\maxim\source\repos\RLC\obj\Release\RLC.exe
+C:\Users\maxim\source\repos\RLC\obj\Release\RLC.pdb

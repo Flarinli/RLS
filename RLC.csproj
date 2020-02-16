@@ -49,6 +49,7 @@
     <Compile Include="Aircraft.cs" />
     <Compile Include="CommandPost.cs" />
     <Compile Include="Convertion.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="OnMyEventDelegate.cs" />
     <Compile Include="RLC.cs" />
@@ -57,7 +58,7 @@
     <Compile Include="Type.cs" />
     <Compile Include="Integrator.cs" />
     <Compile Include="IIntegrator.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="MyPoint.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="RightValue.cs" />
     <Compile Include="RLC_Form.cs">

@@ -32,7 +32,7 @@ namespace RLC
         {
             init_position.X = x0;
             init_position.Y = y0;
-            Current_Position = new Point { X = x0, Y = y0 };
+            Current_Position = new MyPoint { X = x0, Y = y0 };
             init_time = current_time;
             Current_Time = current_time;
             V = absV;
@@ -48,6 +48,6 @@ namespace RLC
         public double xR(double[] X) => X[2] * Math.Cos(X[3]);
         public double yR(double[] X) => X[2] * Math.Sin(X[3]);
         public double vR(double[] X) => X[4] - X[5];
-        public abstract void Move(double[] In, ref OnMyEventDelegate onMyEvent, ref Euler_Integrator integrator);
+        public abstract void Move(double[] In, ref Euler_Integrator integrator);
     }
 }

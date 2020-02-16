@@ -11,7 +11,7 @@ namespace RLC
         {
             init_position.X = x0;
             init_position.Y = y0;
-            Current_Position = new Point { X = x0, Y = y0 };
+            Current_Position = new MyPoint { X = x0, Y = y0 };
             Current_Time = t0;
             Detection_Range = detection_range;
             Distance = double.PositiveInfinity;

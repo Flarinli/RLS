@@ -19,29 +19,30 @@ namespace RLC
         new public double yR(double[] X) => X[2] * Math.Sin(X[3]);
         new public double vR(double[] X) => X[4] - X[5];
         public SAMMissile(double x0,
-                           double y0, double course,
-                           double absV,
-                           double Cx,
-                           double S,
-                           double fuel_mass,
-                           double critical_fuel_mass,
-                           double mass_flow_of_fuel,
-                           double current_time,
-                           double TMax,  //Максимальное время полета до самоуничтожения
-                           double DLose, //Дальность поражения
-                           double PMin,  //Нижняя граница интервала вероятности поражения цели
-                           double PMax,  //Верхняя граница интервала вероятности поражения цели
-                           double PReq)  //Требуемое значение вероятности поражения цели 
-                           : base(x0,
-                                  y0,
-                                  course,
-                                  absV,
-                                  Cx,
-                                  S,
-                                  fuel_mass,
-                                  critical_fuel_mass,
-                                  mass_flow_of_fuel,
-                                  current_time)
+                          double y0,
+                          double course,
+                          double absV,
+                          double Cx,
+                          double S,
+                          double fuel_mass,
+                          double critical_fuel_mass,
+                          double mass_flow_of_fuel,
+                          double current_time,
+                          double TMax,  //Максимальное время полета до самоуничтожения
+                          double DLose, //Дальность поражения
+                          double PMin,  //Нижняя граница интервала вероятности поражения цели
+                          double PMax,  //Верхняя граница интервала вероятности поражения цели
+                          double PReq)  //Требуемое значение вероятности поражения цели 
+                          : base(x0,
+                                 y0,
+                                 course,
+                                 absV,
+                                 Cx,
+                                 S,
+                                 fuel_mass,
+                                 critical_fuel_mass,
+                                 mass_flow_of_fuel,
+                                 current_time)
         {
             this.TMax = TMax;
             this.DLose = DLose;
@@ -50,17 +51,38 @@ namespace RLC
             this.PReq = PReq;
             Time_Of_Flight = 0;
             IsLose = 0;
+            b = true;
 
         }
-
-        public override void Move(double[] In, ref OnMyEventDelegate MyEvent, ref Euler_Integrator Euler)
+        public double course(Target target)
+        {
+            if ((target.Current_Position.X - Current_Position.X) > 0)
+            {
+                return Math.Atan2(target.Current_Position.Y - Current_Position.Y, target.Current_Position.X - Current_Position.X);
+            }
+            else if ((target.Current_Position.X - Current_Position.X)  < 0)
+            {
+                if(-(target.Current_Position.Y - Current_Position.Y) > 0)
+                {
+                    return Math.Atan2(target.Current_Position.Y - Current_Position.Y, target.Current_Position.X - Current_Position.X) + Math.PI;
+                }
+                else
+                {
+                    return Math.Atan2(target.Current_Position.Y - Current_Position.Y, target.Current_Position.X - Current_Position.X) - Math.PI;
+                }
+            }
+            else
+            {
+                return target.Current_Position.Y > 0 ? (Math.PI / 2) : (-Math.PI / 2);
+            }
+        }
+        public override void Move(double[] In, ref Euler_Integrator Euler)
         {
             Current_Time += In[0];
-            Course = DelegateTarget.Current_Position.X == Current_Position.X
-            ? DelegateTarget.Current_Position.Y > 0
-            ? -(Math.PI / 2)
-            : Math.PI / 2
-            : Math.Atan((DelegateTarget.Current_Position.X - Current_Position.X) / (DelegateTarget.Current_Position.Y - Current_Position.Y));
+
+            if ((IsLose == 0) || (IsLose == -1)) return;
+
+            Course = course(DelegateTarget);
 
             double[] X = new double[] { Current_Position.X,
                                         Current_Position.Y,
@@ -70,7 +92,7 @@ namespace RLC
                                         this.X,
                                         In[0] };
             X = Euler.Step_Of_Integrator(X, rightValues);
-            Current_Position = new Point { X = X[0], Y = X[1] };
+            Current_Position = new MyPoint { X = X[0], Y = X[1] };
 
             V = X[2];
             if (Fuel_Mass < Critical_Fuel_Mass)
@@ -94,7 +116,6 @@ namespace RLC
                 Destroy(this);
                 return;
             }
-            MyEvent(this);
         }
     }
 }

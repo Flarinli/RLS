@@ -52,6 +52,9 @@ namespace RLC
             }
             this.OnMyEvent = OnMyEvent;
             MyEvent += OnMyEvent;
+            MyEvent(null);
+            MyEvent(this.my_RLS);
+            MyEvent(this.my_CP);
         }
         public void AppendTarget(Target target)
         {
@@ -77,7 +80,7 @@ namespace RLC
         {
             const int form = 5;
             target.b = my_RLS.Measure(Current_Time, target);
-            target.Move(new double[] { Density, DT }, ref MyEvent, ref Euler);
+            target.Move(new double[] { Density, DT }, ref Euler);
             if (target.b && (target.GetType() != typeof(SAMMissile)))
             {
                 sw.Write($"Цель {targets.IndexOf(target)} обнаружена!\nТекущее время: {Current_Time,form:f2}; ");
@@ -106,10 +109,8 @@ namespace RLC
         }
         public void Run()
         {
-
-            using (StreamWriter sw = new StreamWriter(path, append: true))
+            using (StreamWriter sw = new StreamWriter(path: path, append: true))
             {
-                sw.AutoFlush = true;
                 while (Current_Time <= tk)
                 {
                     if (targets == null) break;
@@ -120,12 +121,11 @@ namespace RLC
                     my_CP.targeting(SAMMissileList, targets);
                     foreach (SAMMissile missile in SAMMissileList.ToArray())
                     {
-                        missile.Move(new double[] { DT, Density }, ref MyEvent, ref Euler);
+                        missile.Move(new double[] { DT, Density }, ref Euler);
                     }
-
+                    MyEvent(this);
                     Current_Time += DT;
                 }
-                sw.Close();
             }
         }
     }

@@ -11,7 +11,7 @@ namespace RLC
                            double cp_y,
                            double Safety_Distance)
         {
-            Current_Position = new Point { X = cp_x, Y = cp_y };
+            Current_Position = new MyPoint { X = cp_x, Y = cp_y };
             this.Safety_Distance = Safety_Distance;
 
         }

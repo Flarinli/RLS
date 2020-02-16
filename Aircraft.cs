@@ -26,7 +26,7 @@ namespace RLC
         {
             flObj = Type.aircraft;
         }
-        public override void Move(double[] In, ref OnMyEventDelegate MyEvent, ref Euler_Integrator Euler)
+        public override void Move(double[] In, ref Euler_Integrator Euler)
         {
             if (V == 0) return;
             double[] X = new double[] { Current_Position.X,
@@ -39,7 +39,7 @@ namespace RLC
 
 
             X = Euler.Step_Of_Integrator(X, rightValues);
-            Current_Position = new Point { X = X[0], Y = X[1] };
+            Current_Position = new MyPoint { X = X[0], Y = X[1] };
             V = X[2] > 0 ? X[2] : 0;
             if (Fuel_Mass < Critical_Fuel_Mass)
             {
@@ -47,7 +47,6 @@ namespace RLC
             }
             Fuel_Mass -= Mass_Flow_Of_Fuel * In[0];
             this.X = Cx * In[1] * Math.Pow(V, 2) * S / 2;
-            MyEvent(this);
         }
     }
 }
