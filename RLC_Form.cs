@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RLC
@@ -37,7 +33,12 @@ namespace RLC
             Bitmap pt = new Bitmap(1, 1);
             if (target.b)
             {
-                pt.SetPixel(0, 0, Color.Red);
+                if(target.GetType() == typeof(SAMMissile))
+                {
+                    pt.SetPixel(0, 0, Color.Yellow);
+                }
+                else
+                    pt.SetPixel(0, 0, Color.Red);
             }
             else
             {
@@ -58,7 +59,6 @@ namespace RLC
             }
             Graphics graphics = pictureBox1.CreateGraphics();
             graphics.TranslateTransform(pictureBox1.Width / 2, pictureBox1.Height / 2);
-            graphics.RotateTransform(90);
 
             DrawAxes(graphics);
 

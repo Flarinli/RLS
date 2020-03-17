@@ -34,7 +34,6 @@ namespace RLC
                          double Density,
                          string path,
                          OnMyEventDelegate OnMyEvent)
-
         {
             targets = new List<Target>();
             SAMMissileList = new List<SAMMissile>();
@@ -94,6 +93,7 @@ namespace RLC
             SAMMissile tmp = O as SAMMissile;
             if (tmp.IsLose == -1)
             {
+                my_CP.delegated_targets.Remove(tmp.DelegateTarget);
                 SAMMissileList.Remove(tmp);
                 Count_CP_Missiles--;
             }

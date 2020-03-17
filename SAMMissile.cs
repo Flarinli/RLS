@@ -58,29 +58,29 @@ namespace RLC
         {
             if ((target.Current_Position.X - Current_Position.X) > 0)
             {
-                return Math.Atan2(target.Current_Position.Y - Current_Position.Y, target.Current_Position.X - Current_Position.X);
+                return Math.Atan((target.Current_Position.Y - Current_Position.Y) / (target.Current_Position.X - Current_Position.X));
             }
             else if ((target.Current_Position.X - Current_Position.X)  < 0)
             {
-                if(-(target.Current_Position.Y - Current_Position.Y) > 0)
+                if((target.Current_Position.Y - Current_Position.Y) > 0)
                 {
-                    return Math.Atan2(target.Current_Position.Y - Current_Position.Y, target.Current_Position.X - Current_Position.X) + Math.PI;
+                    return Math.Atan((target.Current_Position.Y - Current_Position.Y) / (target.Current_Position.X - Current_Position.X)) + Math.PI;
                 }
                 else
                 {
-                    return Math.Atan2(target.Current_Position.Y - Current_Position.Y, target.Current_Position.X - Current_Position.X) - Math.PI;
+                    return Math.Atan((target.Current_Position.Y - Current_Position.Y) / (target.Current_Position.X - Current_Position.X)) - Math.PI;
                 }
             }
             else
             {
-                return target.Current_Position.Y > 0 ? (Math.PI / 2) : (-Math.PI / 2);
+                return (target.Current_Position.Y - Current_Position.Y) > 0 ? (Math.PI / 2) : (-Math.PI / 2);
             }
         }
         public override void Move(double[] In, ref Euler_Integrator Euler)
         {
             Current_Time += In[0];
 
-            if ((IsLose == 0) || (IsLose == -1)) return;
+            if ((DelegateTarget == null) || (IsLose == 1) || (IsLose == -1)) return;
 
             Course = course(DelegateTarget);
 
