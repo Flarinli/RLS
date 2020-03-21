@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace RLC
+namespace RLS
 {
-    public class RLC : Position
+    public class RLS : Position
     {
         public double Detection_Range { get; set; }
         public double Distance { get; set; }
         public double Az { get; set; }
-        public RLC(double x0, double y0, double detection_range, double t0)
+        public RLS(double x0, double y0, double detection_range, double t0)
         {
             init_position.X = x0;
             init_position.Y = y0;

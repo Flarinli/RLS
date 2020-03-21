@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RLC
+namespace RLS
 {
     public class CommandPost : Position
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RLC
+namespace RLS
 {
     public abstract class Target : Position
     {

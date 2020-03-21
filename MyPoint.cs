@@ -1,4 +1,4 @@
-﻿namespace RLC
+﻿namespace RLS
 {
     public struct MyPoint
     {

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RLC
+namespace RLS
 {
     static class Program
     {
@@ -16,7 +13,7 @@ namespace RLC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RLC_Form());
+            Application.Run(new RLS_Form());
         }
     }
 }

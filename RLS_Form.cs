@@ -5,9 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace RLC
+namespace RLS
 {
-    public partial class RLC_Form : Form
+    public partial class RLS_Form : Form
     {
         public const int SCALE = 10;
         public void DrawAxes(Graphics graphics)
@@ -20,7 +20,7 @@ namespace RLC
             graphics.DrawLine(pen, new Point(0, Height / 3), new Point(SCALE, Height / 3 - 3 * SCALE));
             graphics.DrawLine(pen, new Point(0, Height / 3), new Point(-SCALE, Height / 3 - 3 * SCALE));
         }
-        public void DrawRLS(Graphics graphics, RLC rlc)
+        public void DrawRLS(Graphics graphics, RLS rlc)
         {
             graphics.DrawEllipse(new Pen(Color.Green, 2), new RectangleF(Convert.ToSingle(rlc.Current_Position.X - rlc.Detection_Range) * SCALE, Convert.ToSingle(rlc.Current_Position.Y - rlc.Detection_Range) * SCALE, Convert.ToSingle(rlc.Detection_Range * 2 * SCALE), Convert.ToSingle(rlc.Detection_Range * 2 * SCALE)));
         }
@@ -74,13 +74,13 @@ namespace RLC
             Thread.Sleep(100);
         }
 
-        public RLC_Form()
+        public RLS_Form()
         {
             InitializeComponent();
             WindowState = FormWindowState.Maximized;
         }
 
-        private void RLC_Form_Load(object sender, EventArgs e)
+        private void RLS_Form_Load(object sender, EventArgs e)
         {
             dataGridView1.RowCount = Simulator.NUMBER + CommandPost.NUMBER;
 
@@ -123,13 +123,13 @@ namespace RLC
             textBox12.Text = Data.cp_safety_distance.ToString();
             textBox12.ForeColor = Color.Gray;
 
-            textBox13.Text = Data.rlc_x.ToString();
+            textBox13.Text = Data.rls_x.ToString();
             textBox13.ForeColor = Color.Gray;
 
-            textBox14.Text = Data.rlc_y.ToString();
+            textBox14.Text = Data.rls_y.ToString();
             textBox14.ForeColor = Color.Gray;
 
-            textBox15.Text = Data.rlc_det_range.ToString();
+            textBox15.Text = Data.rls_det_range.ToString();
             textBox15.ForeColor = Color.Gray;
 
             textBox16.Text = Data.simulator_T0.ToString();
@@ -411,10 +411,10 @@ namespace RLC
             textBox13.ForeColor = Color.Gray;
             try
             {
-                Data.rlc_x = Convert.ToDouble(textBox13.Text.Trim('-'));
-                if (textBox13.Text[0] == '-') Data.rlc_x *= -1;
+                Data.rls_x = Convert.ToDouble(textBox13.Text.Trim('-'));
+                if (textBox13.Text[0] == '-') Data.rls_x *= -1;
             }
-            catch { textBox13.Text = Data.rlc_x.ToString(); }
+            catch { textBox13.Text = Data.rls_x.ToString(); }
         }
 
         private void textBox13_KeyUp(object sender, KeyEventArgs e)
@@ -427,10 +427,10 @@ namespace RLC
             textBox14.ForeColor = Color.Gray;
             try
             {
-                Data.rlc_y = Convert.ToDouble(textBox14.Text.Trim('-'));
-                if (textBox14.Text[0] == '-') Data.rlc_y *= -1;
+                Data.rls_y = Convert.ToDouble(textBox14.Text.Trim('-'));
+                if (textBox14.Text[0] == '-') Data.rls_y *= -1;
             }
-            catch { textBox14.Text = Data.rlc_y.ToString(); }
+            catch { textBox14.Text = Data.rls_y.ToString(); }
         }
 
         private void textBox14_KeyUp(object sender, KeyEventArgs e)
@@ -443,10 +443,10 @@ namespace RLC
             textBox15.ForeColor = Color.Gray;
             try
             {
-                Data.rlc_det_range = Convert.ToDouble(textBox15.Text.Trim('-'));
-                if (textBox15.Text[0] == '-') Data.rlc_det_range *= -1;
+                Data.rls_det_range = Convert.ToDouble(textBox15.Text.Trim('-'));
+                if (textBox15.Text[0] == '-') Data.rls_det_range *= -1;
             }
-            catch { textBox15.Text = Data.rlc_det_range.ToString(); }
+            catch { textBox15.Text = Data.rls_det_range.ToString(); }
         }
 
         private void textBox15_KeyUp(object sender, KeyEventArgs e)
@@ -723,9 +723,9 @@ namespace RLC
                 MessageBox.Show("Вы не создали все цели!");
                 return;
             }
-            RLC my_RLC = new RLC(Data.rlc_x,
-                                 Data.rlc_y,
-                                 Data.rlc_det_range,
+            RLS my_RLC = new RLS(Data.rls_x,
+                                 Data.rls_y,
+                                 Data.rls_det_range,
                                  Data.simulator_T0);
 
             CommandPost my_CP = new CommandPost(Data.cp_x,

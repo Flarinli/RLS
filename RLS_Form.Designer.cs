@@ -1,6 +1,6 @@
-﻿namespace RLC
+﻿namespace RLS
 {
-    partial class RLC_Form
+    partial class RLS_Form
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -49,7 +49,9 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
@@ -117,8 +119,6 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -216,7 +216,7 @@
             this.tabPage1.Controls.Add(this.splitContainer2);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1646, 590);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Условия моделирования";
@@ -427,6 +427,20 @@
             this.radioButton1.Enter += new System.EventHandler(this.radioButton_Enter);
             this.radioButton1.Leave += new System.EventHandler(this.radioButton_Leave);
             // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(106, 3);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(85, 24);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Aircraft";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.radioButton2.Enter += new System.EventHandler(this.radioButton_Enter);
+            this.radioButton2.Leave += new System.EventHandler(this.radioButton_Leave);
+            // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
@@ -440,6 +454,20 @@
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             this.radioButton3.Enter += new System.EventHandler(this.radioButton_Enter);
             this.radioButton3.Leave += new System.EventHandler(this.radioButton_Leave);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(106, 59);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(98, 24);
+            this.radioButton4.TabIndex = 3;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "SAMMissile";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            this.radioButton4.Enter += new System.EventHandler(this.radioButton_Enter);
+            this.radioButton4.Leave += new System.EventHandler(this.radioButton_Leave);
             // 
             // groupBox2
             // 
@@ -717,7 +745,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 356F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 366F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1640, 366);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -1218,8 +1246,8 @@
             this.tabPage2.Controls.Add(this.pictureBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(1646, 591);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1646, 590);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Результат моделирования";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1229,7 +1257,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1640, 585);
+            this.pictureBox1.Size = new System.Drawing.Size(1640, 584);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -1271,35 +1299,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(106, 59);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(98, 24);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "SAMMissile";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
-            this.radioButton4.Enter += new System.EventHandler(this.radioButton_Enter);
-            this.radioButton4.Leave += new System.EventHandler(this.radioButton_Leave);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(106, 3);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(85, 24);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Aircraft";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            this.radioButton2.Enter += new System.EventHandler(this.radioButton_Enter);
-            this.radioButton2.Leave += new System.EventHandler(this.radioButton_Leave);
-            // 
-            // RLC_Form
+            // RLS_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -1308,10 +1308,10 @@
             this.ClientSize = new System.Drawing.Size(1654, 712);
             this.Controls.Add(this.splitContainer1);
             this.KeyPreview = true;
-            this.Name = "RLC_Form";
+            this.Name = "RLS_Form";
             this.ShowIcon = false;
-            this.Text = "RLC";
-            this.Load += new System.EventHandler(this.RLC_Form_Load);
+            this.Text = "RLS";
+            this.Load += new System.EventHandler(this.RLS_Form_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

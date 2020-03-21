@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace RLC
+namespace RLS
 {
     public static class Data
     {
@@ -32,16 +28,16 @@ namespace RLC
                              cp_PMax = 0.9,
                              cp_PReq = 0.75;
 
-        public static double rlc_x = 0,
-                             rlc_y = 0,
-                             rlc_det_range = 10;
+        public static double rls_x = 0,
+                             rls_y = 0,
+                             rls_det_range = 10;
 
         public static double simulator_T0 = 0,
                              simulator_Tk = 50,
                              simulator_dT = 0.001,
                              simulator_density = 1.233;
 
-        public static string simulator_path = "Text.txt";
+        public static string simulator_path = "RLS.txt";
 
         public static List<Target> targets = new List<Target>();
         public static List<SAMMissile> missiles = new List<SAMMissile>();

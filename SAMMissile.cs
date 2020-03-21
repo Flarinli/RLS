@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RLC
+namespace RLS
 {
     public class SAMMissile : Missile
     {

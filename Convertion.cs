@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RLC
+namespace RLS
 {
     public static class Convertion
     {

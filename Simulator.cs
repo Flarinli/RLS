@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 
-namespace RLC
+namespace RLS
 {
     public class Simulator
     {
@@ -15,7 +15,7 @@ namespace RLC
         public double Density { get; set; }     //Плотность атмосферы. Принимается постоянной
         public List<Target> targets;
         public List<SAMMissile> SAMMissileList;
-        public RLC my_RLS;
+        public RLS my_RLS;
         public CommandPost my_CP;
         public readonly double t0, tk;
         public double Current_Time { get; set; }
@@ -26,7 +26,7 @@ namespace RLC
 
         public OnMyEventDelegate OnMyEvent { get; set; }
         public event OnMyEventDelegate MyEvent;
-        public Simulator(ref RLC my_RLS,
+        public Simulator(ref RLS my_RLS,
                          ref CommandPost my_CP,
                          double t0,
                          double tk,
