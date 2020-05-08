@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>RLS</RootNamespace>
     <AssemblyName>RLS</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,6 +55,7 @@
     <Compile Include="CommandPost.cs" />
     <Compile Include="Convertion.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="WorkingWithDB.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="OnMyEventDelegate.cs" />
     <Compile Include="RLS.cs" />

@@ -5,10 +5,13 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+
 namespace RLS
 {
     public partial class RLS_Form : Form
-    {
+    { 
+
+
         public const int SCALE = 10;
         public void DrawAxes(Graphics graphics)
         {
@@ -22,11 +25,25 @@ namespace RLS
         }
         public void DrawRLS(Graphics graphics, RLS rlc)
         {
-            graphics.DrawEllipse(new Pen(Color.Green, 2), new RectangleF(Convert.ToSingle(rlc.Current_Position.X - rlc.Detection_Range) * SCALE, Convert.ToSingle(rlc.Current_Position.Y - rlc.Detection_Range) * SCALE, Convert.ToSingle(rlc.Detection_Range * 2 * SCALE), Convert.ToSingle(rlc.Detection_Range * 2 * SCALE)));
+            graphics.DrawEllipse(
+                new Pen(Color.Green, 2), 
+                new RectangleF(
+                    Convert.ToSingle(rlc.Current_Position.X - rlc.Detection_Range) * SCALE, 
+                    Convert.ToSingle(rlc.Current_Position.Y - rlc.Detection_Range) * SCALE, 
+                    Convert.ToSingle(rlc.Detection_Range * 2 * SCALE), 
+                    Convert.ToSingle(rlc.Detection_Range * 2 * SCALE)
+                ));
         }
         public void DrawCommandPost(Graphics graphics, CommandPost cp)
         {
-            graphics.DrawEllipse(new Pen(Color.YellowGreen, 2), new RectangleF(Convert.ToSingle(cp.Current_Position.X - cp.Safety_Distance) * SCALE, Convert.ToSingle(cp.Current_Position.Y - cp.Safety_Distance) * SCALE, Convert.ToSingle(cp.Safety_Distance * 2 * SCALE), Convert.ToSingle(cp.Safety_Distance * 2 * SCALE)));
+            graphics.DrawEllipse(
+                new Pen(Color.YellowGreen, 2), 
+                new RectangleF(
+                    Convert.ToSingle(cp.Current_Position.X - cp.Safety_Distance) * SCALE,
+                    Convert.ToSingle(cp.Current_Position.Y - cp.Safety_Distance) * SCALE, 
+                    Convert.ToSingle(cp.Safety_Distance * 2 * SCALE), 
+                    Convert.ToSingle(cp.Safety_Distance * 2 * SCALE)
+                    ));
         }
         public void DrawTarget(Graphics graphics, Target target)
         {
@@ -82,6 +99,12 @@ namespace RLS
 
         private void RLS_Form_Load(object sender, EventArgs e)
         {
+            DateTime now = DateTime.Now;
+            List<string> columns = new List<string>() { "Date", "Time", "Comment" };
+            List<string> values = new List<string>() { now.ToString("d"), now.ToString("T"), "None" };
+            WorkingWithDB.Insert("Experiments", columns, values);
+
+
             dataGridView1.RowCount = Simulator.NUMBER + CommandPost.NUMBER;
 
             radioButton2.Checked = true;
@@ -678,17 +701,58 @@ namespace RLS
                 switch (Data.target_type)
                 {
                     case Type.aircraft:
-                        Data.targets.Add(new Aircraft(Data.target_x, Data.target_y, Data.target_K, Data.target_v, Data.target_Cx, Data.target_S, Data.target_fuel_mass, Data.target_critical_fuel_mass, Data.target_mass_flow_of_fuel, Data.simulator_T0));
+                        Data.targets.Add(
+                            new Aircraft(
+                                Data.target_x, 
+                                Data.target_y, 
+                                Data.target_K, 
+                                Data.target_v,
+                                Data.target_Cx, 
+                                Data.target_S,
+                                Data.target_fuel_mass,
+                                Data.target_critical_fuel_mass,
+                                Data.target_mass_flow_of_fuel,
+                                Data.simulator_T0
+                                ));
                         dataGridView1.Rows[Data.Count_Target + Data.Count_CP_Missiles].Cells[0].Value = "Самолет";
                         Data.Count_Target++;
                         break;
                     case Type.missile:
-                        Data.targets.Add(new Missile(Data.target_x, Data.target_y, Data.target_K, Data.target_v, Data.target_Cx, Data.target_S, Data.target_fuel_mass, Data.target_critical_fuel_mass, Data.target_mass_flow_of_fuel, Data.simulator_T0));
+                        Data.targets.Add(
+                            new Missile(
+                                Data.target_x,
+                                Data.target_y, 
+                                Data.target_K,
+                                Data.target_v,
+                                Data.target_Cx,
+                                Data.target_S, 
+                                Data.target_fuel_mass,
+                                Data.target_critical_fuel_mass,
+                                Data.target_mass_flow_of_fuel,
+                                Data.simulator_T0
+                                ));
                         dataGridView1.Rows[Data.Count_Target + Data.Count_CP_Missiles].Cells[0].Value = "Ракета";
                         Data.Count_Target++;
                         break;
                     case Type.sammissile:
-                        Data.missiles.Add(new SAMMissile(Data.target_x, Data.target_y, Data.target_K, Data.target_v, Data.target_Cx, Data.target_S, Data.target_fuel_mass, Data.target_critical_fuel_mass, Data.target_mass_flow_of_fuel, Data.simulator_T0, Data.cp_TMax, Data.cp_DLose, Data.cp_PMin, Data.cp_PMax, Data.cp_PReq));
+                        Data.missiles.Add(
+                            new SAMMissile(
+                                Data.target_x,
+                                Data.target_y, 
+                                Data.target_K, 
+                                Data.target_v, 
+                                Data.target_Cx,
+                                Data.target_S, 
+                                Data.target_fuel_mass, 
+                                Data.target_critical_fuel_mass, 
+                                Data.target_mass_flow_of_fuel, 
+                                Data.simulator_T0, 
+                                Data.cp_TMax, 
+                                Data.cp_DLose,
+                                Data.cp_PMin,
+                                Data.cp_PMax,
+                                Data.cp_PReq
+                                ));
                         dataGridView1.Rows[Data.Count_Target + Data.Count_CP_Missiles].Cells[0].Value = "SAMMissile";
                         Data.Count_CP_Missiles++;
                         break;

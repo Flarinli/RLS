@@ -1,0 +1,10 @@
+C:\Users\maxim\Desktop\C#\RLS\bin\Debug\RLS.exe.config
+C:\Users\maxim\Desktop\C#\RLS\bin\Debug\RLS.exe
+C:\Users\maxim\Desktop\C#\RLS\bin\Debug\RLS.pdb
+C:\Users\maxim\Desktop\C#\RLS\obj\Debug\RLS.csprojAssemblyReference.cache
+C:\Users\maxim\Desktop\C#\RLS\obj\Debug\RLS.Properties.Resources.resources
+C:\Users\maxim\Desktop\C#\RLS\obj\Debug\RLS.RLS_Form.resources
+C:\Users\maxim\Desktop\C#\RLS\obj\Debug\RLS.csproj.GenerateResource.cache
+C:\Users\maxim\Desktop\C#\RLS\obj\Debug\RLS.csproj.CoreCompileInputs.cache
+C:\Users\maxim\Desktop\C#\RLS\obj\Debug\RLS.exe
+C:\Users\maxim\Desktop\C#\RLS\obj\Debug\RLS.pdb
