@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RLS
 {
@@ -16,6 +17,8 @@ namespace RLS
             Detection_Range = detection_range;
             Distance = double.PositiveInfinity;
             Az = double.PositiveInfinity;
+            WorkingWithDB.Insert("Objects", new List<string>() { "idExperiment", "initX", "InitY" }, new List<string>() { WorkingWithDB.ExperimentID, x0.ToString(), y0.ToString() });//Поправить в БД и здесь initX на InitX
+            WorkingWithDB.Insert("RLSs", new List<string>() { "idObject", "DetRange" }, new List<string>() { WorkingWithDB.CurID, detection_range.ToString() });
         }
         public bool Measure(double Current_Time, Target target)
         {
