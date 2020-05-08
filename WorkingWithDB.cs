@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
 using System;
-using System.Windows.Forms;
 
 namespace RLS
 {
@@ -40,7 +37,6 @@ namespace RLS
             }
             if (table == "Experiments")
                 experimentID = curID;
-            MessageBox.Show(CurID);//УБРАТЬ ПОТОМ
             sqlCommand.Parameters.Clear();
             sqlConnection.Close();
         }

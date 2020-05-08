@@ -14,7 +14,7 @@ namespace RLS
             Current_Position = new MyPoint { X = cp_x, Y = cp_y };
             this.Safety_Distance = Safety_Distance;
             delegated_targets = new List<Target>();
-            WorkingWithDB.Insert("Objects", new List<string>() { "idExperiment", "initX", "InitY" }, new List<string>() { WorkingWithDB.ExperimentID, cp_x.ToString(), cp_y.ToString() });//Поправить в БД и здесь initX на InitX
+            WorkingWithDB.Insert("Objects", new List<string>() { "idExperiment", "InitX", "InitY" }, new List<string>() { WorkingWithDB.ExperimentID, cp_x.ToString(), cp_y.ToString() });
             WorkingWithDB.Insert("CommandPosts", new List<string>() { "idObject", "SafetyDistance" }, new List<string>() { WorkingWithDB.CurID, Safety_Distance.ToString() });
         }
         public void targeting(List<SAMMissile> missiles, List<Target> targets)
