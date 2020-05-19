@@ -103,7 +103,7 @@ namespace RLS
             List<string> columns = new List<string>() { "Date", "Time", "Comment" };
             List<string> values = new List<string>() { now.ToString("d"), now.ToString("T"), "None" };
             WorkingWithDB.Insert("Experiments", columns, values);
-
+            WorkingWithDB.ShowTablesInListBox(listBox2);
 
             dataGridView1.RowCount = Simulator.NUMBER + CommandPost.NUMBER;
 
@@ -822,6 +822,97 @@ namespace RLS
         {
             if (thread != null) thread.Abort();
             Application.Exit();
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button6.Enabled = false;
+            WorkingWithDB.selected_table = listBox2.SelectedItem.ToString();
+            WorkingWithDB.ShowColumnsInListBox(WorkingWithDB.selected_table, listBox3);
+        }
+
+        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WorkingWithDB.selected_column = listBox3.SelectedItem.ToString();
+            button6.Enabled = true;
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (checkedListBox1.GetItemChecked(0))                                         // Уникальные строки
+                WorkingWithDB.uniq_strings = "DISTINCT";
+            else
+                WorkingWithDB.uniq_strings = "";
+
+            if (!checkedListBox1.GetItemChecked(1))                                         // Упорядочивание строк в выборке;
+                WorkingWithDB.ordering_string = "";
+            else
+                radioButton5.Enabled = radioButton6.Enabled = true;
+
+            if (!checkedListBox1.GetItemChecked(2))                                         // Сравнение
+                WorkingWithDB.comparison = "";
+            else
+                textBox29.Enabled = true;
+
+            if (!checkedListBox1.GetItemChecked(3))                                         // Попадание в диапазон
+                WorkingWithDB.belonging_to_range = "";
+            else
+                textBox31.Enabled = true;
+
+            if (!checkedListBox1.GetItemChecked(4))                                         // Соответствие шаблону
+                WorkingWithDB.pattern_matching = "";
+            else
+                textBox30.Enabled = true;
+
+            WorkingWithDB.where = (checkedListBox1.GetItemChecked(1)) || (checkedListBox1.GetItemChecked(2)) || (checkedListBox1.GetItemChecked(3)) || (checkedListBox1.GetItemChecked(4))
+                ? "WHERE"
+                : "";
+        }
+
+        private void textBox29_TextChanged(object sender, EventArgs e)
+        {
+            string temp = textBox29.Text;
+            if (!(temp.Contains("=") || temp.Contains(">") || temp.Contains("<") || temp.Contains(">=") || temp.Contains("<=") || temp.Contains("<>")))
+                return;
+            WorkingWithDB.comparison = $"{WorkingWithDB.selected_column}{temp}";
+        }
+
+        private void textBox31_TextChanged(object sender, EventArgs e)
+        {
+            WorkingWithDB.begin = textBox31.Text;
+            textBox32.Enabled = true;
+        }
+
+        private void textBox32_TextChanged(object sender, EventArgs e)
+        {
+            WorkingWithDB.end = textBox32.Text;
+            WorkingWithDB.belonging_to_range = $"{WorkingWithDB.selected_column} BETWEEN '{WorkingWithDB.begin}' AND '{WorkingWithDB.end}'";
+        }
+
+        private void textBox30_TextChanged(object sender, EventArgs e)
+        {
+            string temp = textBox30.Text;
+            if (!(temp.Contains("%") || temp.Contains("_") || temp.Contains("[]") || temp.Contains("[^]")))
+                return;
+            WorkingWithDB.pattern_matching = $"{WorkingWithDB.selected_column} LIKE '{temp}'";
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_column} ASC";
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_column} DESC";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            WorkingWithDB.SelectRequestToListBox(listBox1);
+//            MessageBox.Show(WorkingWithDB.selected_table + "\n" + WorkingWithDB.selected_column + "\n" + WorkingWithDB.uniq_strings + "\n" + WorkingWithDB.where + "\n" + WorkingWithDB.comparison + "\n" + WorkingWithDB.pattern_matching + "\n" + WorkingWithDB.ordering_string);
+            WorkingWithDB.ClearRequestsData();
+            button6.Enabled = false;
         }
     }
 }

@@ -116,6 +116,34 @@
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox36 = new System.Windows.Forms.GroupBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.groupBox35 = new System.Windows.Forms.GroupBox();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox34 = new System.Windows.Forms.GroupBox();
+            this.groupBox39 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox30 = new System.Windows.Forms.TextBox();
+            this.groupBox38 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox32 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox31 = new System.Windows.Forms.TextBox();
+            this.groupBox37 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox29 = new System.Windows.Forms.TextBox();
+            this.groupBox33 = new System.Windows.Forms.GroupBox();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -179,6 +207,17 @@
             this.groupBox17.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.groupBox36.SuspendLayout();
+            this.groupBox35.SuspendLayout();
+            this.groupBox34.SuspendLayout();
+            this.groupBox39.SuspendLayout();
+            this.groupBox38.SuspendLayout();
+            this.groupBox37.SuspendLayout();
+            this.groupBox33.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -204,6 +243,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -1261,6 +1301,307 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.tabControl2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1646, 590);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "База данных";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage5);
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.Location = new System.Drawing.Point(0, 0);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(1646, 590);
+            this.tabControl2.TabIndex = 1;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button6);
+            this.tabPage5.Controls.Add(this.groupBox36);
+            this.tabPage5.Controls.Add(this.groupBox35);
+            this.tabPage5.Controls.Add(this.groupBox34);
+            this.tabPage5.Controls.Add(this.groupBox33);
+            this.tabPage5.Location = new System.Drawing.Point(4, 29);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1638, 557);
+            this.tabPage5.TabIndex = 1;
+            this.tabPage5.Text = "Действия";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(875, 6);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(236, 379);
+            this.button6.TabIndex = 20;
+            this.button6.Text = "Сделать запрос";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // groupBox36
+            // 
+            this.groupBox36.Controls.Add(this.checkedListBox1);
+            this.groupBox36.Location = new System.Drawing.Point(6, 168);
+            this.groupBox36.Name = "groupBox36";
+            this.groupBox36.Size = new System.Drawing.Size(392, 217);
+            this.groupBox36.TabIndex = 19;
+            this.groupBox36.TabStop = false;
+            this.groupBox36.Text = "Условия";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "Уникальные строки",
+            "Упорядочивание строк в выборке",
+            "Сравнение",
+            "Попадание в диапазон",
+            "Соответствие шаблону"});
+            this.checkedListBox1.Location = new System.Drawing.Point(3, 22);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(386, 192);
+            this.checkedListBox1.TabIndex = 7;
+            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+            // 
+            // groupBox35
+            // 
+            this.groupBox35.Controls.Add(this.listBox3);
+            this.groupBox35.Controls.Add(this.label2);
+            this.groupBox35.Controls.Add(this.listBox2);
+            this.groupBox35.Controls.Add(this.label1);
+            this.groupBox35.Location = new System.Drawing.Point(6, 6);
+            this.groupBox35.Name = "groupBox35";
+            this.groupBox35.Size = new System.Drawing.Size(392, 156);
+            this.groupBox35.TabIndex = 18;
+            this.groupBox35.TabStop = false;
+            this.groupBox35.Text = "Выбор таблицы и поля";
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 20;
+            this.listBox3.Location = new System.Drawing.Point(209, 43);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(165, 104);
+            this.listBox3.TabIndex = 13;
+            this.listBox3.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(205, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Поле";
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 20;
+            this.listBox2.Location = new System.Drawing.Point(10, 43);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(165, 104);
+            this.listBox2.TabIndex = 12;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Таблица";
+            // 
+            // groupBox34
+            // 
+            this.groupBox34.Controls.Add(this.groupBox39);
+            this.groupBox34.Controls.Add(this.groupBox38);
+            this.groupBox34.Controls.Add(this.groupBox37);
+            this.groupBox34.Location = new System.Drawing.Point(404, 168);
+            this.groupBox34.Name = "groupBox34";
+            this.groupBox34.Size = new System.Drawing.Size(465, 217);
+            this.groupBox34.TabIndex = 14;
+            this.groupBox34.TabStop = false;
+            this.groupBox34.Text = "Отбор данных";
+            // 
+            // groupBox39
+            // 
+            this.groupBox39.Controls.Add(this.label4);
+            this.groupBox39.Controls.Add(this.textBox30);
+            this.groupBox39.Location = new System.Drawing.Point(6, 117);
+            this.groupBox39.Name = "groupBox39";
+            this.groupBox39.Size = new System.Drawing.Size(231, 86);
+            this.groupBox39.TabIndex = 22;
+            this.groupBox39.TabStop = false;
+            this.groupBox39.Text = "Соответствие шаблону";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 20);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Шаблон";
+            // 
+            // textBox30
+            // 
+            this.textBox30.Enabled = false;
+            this.textBox30.Location = new System.Drawing.Point(125, 30);
+            this.textBox30.Name = "textBox30";
+            this.textBox30.Size = new System.Drawing.Size(100, 26);
+            this.textBox30.TabIndex = 15;
+            this.textBox30.TextChanged += new System.EventHandler(this.textBox30_TextChanged);
+            // 
+            // groupBox38
+            // 
+            this.groupBox38.Controls.Add(this.label7);
+            this.groupBox38.Controls.Add(this.textBox32);
+            this.groupBox38.Controls.Add(this.label6);
+            this.groupBox38.Controls.Add(this.textBox31);
+            this.groupBox38.Location = new System.Drawing.Point(243, 25);
+            this.groupBox38.Name = "groupBox38";
+            this.groupBox38.Size = new System.Drawing.Size(210, 178);
+            this.groupBox38.TabIndex = 21;
+            this.groupBox38.TabStop = false;
+            this.groupBox38.Text = "Попадание в диапазон";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 101);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(30, 20);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "До";
+            // 
+            // textBox32
+            // 
+            this.textBox32.Enabled = false;
+            this.textBox32.Location = new System.Drawing.Point(42, 98);
+            this.textBox32.Name = "textBox32";
+            this.textBox32.Size = new System.Drawing.Size(100, 26);
+            this.textBox32.TabIndex = 17;
+            this.textBox32.TextChanged += new System.EventHandler(this.textBox32_TextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 38);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(30, 20);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "От";
+            // 
+            // textBox31
+            // 
+            this.textBox31.Enabled = false;
+            this.textBox31.Location = new System.Drawing.Point(42, 35);
+            this.textBox31.Name = "textBox31";
+            this.textBox31.Size = new System.Drawing.Size(100, 26);
+            this.textBox31.TabIndex = 15;
+            this.textBox31.TextChanged += new System.EventHandler(this.textBox31_TextChanged);
+            // 
+            // groupBox37
+            // 
+            this.groupBox37.Controls.Add(this.label3);
+            this.groupBox37.Controls.Add(this.textBox29);
+            this.groupBox37.Location = new System.Drawing.Point(6, 25);
+            this.groupBox37.Name = "groupBox37";
+            this.groupBox37.Size = new System.Drawing.Size(231, 86);
+            this.groupBox37.TabIndex = 20;
+            this.groupBox37.TabStop = false;
+            this.groupBox37.Text = "Сравнение";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 38);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 20);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Значение";
+            // 
+            // textBox29
+            // 
+            this.textBox29.Enabled = false;
+            this.textBox29.Location = new System.Drawing.Point(125, 35);
+            this.textBox29.Name = "textBox29";
+            this.textBox29.Size = new System.Drawing.Size(100, 26);
+            this.textBox29.TabIndex = 13;
+            this.textBox29.TextChanged += new System.EventHandler(this.textBox29_TextChanged);
+            // 
+            // groupBox33
+            // 
+            this.groupBox33.Controls.Add(this.radioButton5);
+            this.groupBox33.Controls.Add(this.radioButton6);
+            this.groupBox33.Location = new System.Drawing.Point(404, 6);
+            this.groupBox33.Name = "groupBox33";
+            this.groupBox33.Size = new System.Drawing.Size(465, 156);
+            this.groupBox33.TabIndex = 13;
+            this.groupBox33.TabStop = false;
+            this.groupBox33.Text = "Упорядочивание строк";
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Enabled = false;
+            this.radioButton5.Location = new System.Drawing.Point(16, 43);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(159, 24);
+            this.radioButton5.TabIndex = 9;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "По возрастанию";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Enabled = false;
+            this.radioButton6.Location = new System.Drawing.Point(16, 73);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(134, 24);
+            this.radioButton6.TabIndex = 10;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "По убыванию";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.listBox1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1638, 557);
+            this.tabPage4.TabIndex = 0;
+            this.tabPage4.Text = "Данные";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(3, 3);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(1632, 551);
+            this.listBox1.TabIndex = 0;
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
@@ -1398,6 +1739,22 @@
             this.groupBox17.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.groupBox36.ResumeLayout(false);
+            this.groupBox35.ResumeLayout(false);
+            this.groupBox35.PerformLayout();
+            this.groupBox34.ResumeLayout(false);
+            this.groupBox39.ResumeLayout(false);
+            this.groupBox39.PerformLayout();
+            this.groupBox38.ResumeLayout(false);
+            this.groupBox38.PerformLayout();
+            this.groupBox37.ResumeLayout(false);
+            this.groupBox37.PerformLayout();
+            this.groupBox33.ResumeLayout(false);
+            this.groupBox33.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1496,6 +1853,34 @@
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.GroupBox groupBox36;
+        private System.Windows.Forms.GroupBox groupBox35;
+        private System.Windows.Forms.GroupBox groupBox34;
+        private System.Windows.Forms.GroupBox groupBox39;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox30;
+        private System.Windows.Forms.GroupBox groupBox38;
+        private System.Windows.Forms.GroupBox groupBox37;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox29;
+        private System.Windows.Forms.GroupBox groupBox33;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox32;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox31;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox listBox3;
     }
 }
 
