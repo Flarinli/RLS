@@ -828,14 +828,11 @@ namespace RLS
         {
             button6.Enabled = false;
             WorkingWithDB.selected_table = listBox2.SelectedItem.ToString();
+            WorkingWithDB.ShowColumnsInCheckedListBox(WorkingWithDB.selected_table, checkedListBox2);
             WorkingWithDB.ShowColumnsInListBox(WorkingWithDB.selected_table, listBox3);
         }
 
-        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            WorkingWithDB.selected_column = listBox3.SelectedItem.ToString();
-            button6.Enabled = true;
-        }
+
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -874,7 +871,7 @@ namespace RLS
             string temp = textBox29.Text;
             if (!(temp.Contains("=") || temp.Contains(">") || temp.Contains("<") || temp.Contains(">=") || temp.Contains("<=") || temp.Contains("<>")))
                 return;
-            WorkingWithDB.comparison = $"{WorkingWithDB.selected_column}{temp}";
+            WorkingWithDB.comparison = $"{WorkingWithDB.selected_cond_column}{temp}";
         }
 
         private void textBox31_TextChanged(object sender, EventArgs e)
@@ -886,7 +883,7 @@ namespace RLS
         private void textBox32_TextChanged(object sender, EventArgs e)
         {
             WorkingWithDB.end = textBox32.Text;
-            WorkingWithDB.belonging_to_range = $"{WorkingWithDB.selected_column} BETWEEN '{WorkingWithDB.begin}' AND '{WorkingWithDB.end}'";
+            WorkingWithDB.belonging_to_range = $"{WorkingWithDB.selected_cond_column} BETWEEN '{WorkingWithDB.begin}' AND '{WorkingWithDB.end}'";
         }
 
         private void textBox30_TextChanged(object sender, EventArgs e)
@@ -894,25 +891,42 @@ namespace RLS
             string temp = textBox30.Text;
             if (!(temp.Contains("%") || temp.Contains("_") || temp.Contains("[]") || temp.Contains("[^]")))
                 return;
-            WorkingWithDB.pattern_matching = $"{WorkingWithDB.selected_column} LIKE '{temp}'";
+            WorkingWithDB.pattern_matching = $"{WorkingWithDB.selected_cond_column} LIKE '{temp}'";
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
-            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_column} ASC";
+            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_cond_column} ASC";
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
-            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_column} DESC";
+            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_cond_column} DESC";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             WorkingWithDB.SelectRequestToListBox(listBox1);
-//            MessageBox.Show(WorkingWithDB.selected_table + "\n" + WorkingWithDB.selected_column + "\n" + WorkingWithDB.uniq_strings + "\n" + WorkingWithDB.where + "\n" + WorkingWithDB.comparison + "\n" + WorkingWithDB.pattern_matching + "\n" + WorkingWithDB.ordering_string);
-            WorkingWithDB.ClearRequestsData();
             button6.Enabled = false;
+        }
+
+        private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WorkingWithDB.selected_columns.Clear();
+            foreach (string selected_column in checkedListBox2.CheckedItems)
+                WorkingWithDB.selected_columns.Add(selected_column);
+            if (!(checkedListBox2.CheckedItems == null))
+                button6.Enabled = true;
+        }
+
+        private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WorkingWithDB.selected_cond_column = listBox3.SelectedItem.ToString();
         }
     }
 }

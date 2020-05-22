@@ -17,7 +17,9 @@ namespace RLS
 
         public static string DB_request_string = "";
         public static string selected_table = "";
-        public static string selected_column = "";
+        public static List<string> selected_columns = new List<string>();
+        public static string selected_colums_string = "";
+        public static string selected_cond_column = "";
         public static string uniq_strings = "";
         public static string ordering_string = "";
         public static string where = "";
@@ -88,11 +90,31 @@ namespace RLS
             }
             sqlConnection.Close();
         }
-        
+
+        public static async void ShowColumnsInCheckedListBox(string table_name, CheckedListBox checkedList)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connection_string);
+            await sqlConnection.OpenAsync();
+
+            SqlDataReader sqlDataReader = null;
+            sqlCommand = new SqlCommand($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table_name}'", sqlConnection);
+            sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+
+            checkedList.Items.Clear();
+            while (await sqlDataReader.ReadAsync())
+            {
+                string table = sqlDataReader[0].ToString();
+                checkedList.Items.Add(table);
+            }
+            sqlConnection.Close();
+        }
+
         public static void ClearRequestsData()
         {
             selected_table = "";
-            selected_column = "";
+            selected_columns.Clear();
+            selected_colums_string = "";
+            selected_cond_column = "";
             uniq_strings = "";
             ordering_string = "";
             where = "";
@@ -104,7 +126,8 @@ namespace RLS
 
         public static async void SelectRequestToListBox(ListBox listBox)
         {
-            DB_request_string = $"SELECT {uniq_strings} {selected_column} FROM {selected_table} {where} {pattern_matching} {comparison} {belonging_to_range}{ordering_string}";
+            selected_colums_string = string.Join(",", selected_columns.ToArray());
+            DB_request_string = $"SELECT {uniq_strings} {selected_colums_string} FROM {selected_table} {where} {pattern_matching} {comparison} {belonging_to_range}{ordering_string}";
             MessageBox.Show(DB_request_string);
             SqlConnection sqlConnection = new SqlConnection(connection_string);
             await sqlConnection.OpenAsync();
@@ -113,12 +136,15 @@ namespace RLS
             sqlCommand = new SqlCommand(DB_request_string, sqlConnection);
             sqlDataReader = await sqlCommand.ExecuteReaderAsync();
             listBox.Items.Clear();
+            listBox.Items.Add(string.Join("\t", selected_columns.ToArray()));
             while (await sqlDataReader.ReadAsync())
             {
-                string element = sqlDataReader[0].ToString();
-                listBox.Items.Add(element);
+                string temp = "";
+                for (int i = 0; i < sqlDataReader.FieldCount; ++i)
+                    temp += sqlDataReader[i].ToString() + "\t";
+                listBox.Items.Add(temp);
             }
-
+            ClearRequestsData();
             sqlConnection.Close();
         }
 
