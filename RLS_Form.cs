@@ -826,88 +826,21 @@ namespace RLS
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            button6.Enabled = false;
+            if (dataGridView2.Rows.Count != 1)
+                dataGridView2.Rows.Clear();
             WorkingWithDB.selected_table = listBox2.SelectedItem.ToString();
-            WorkingWithDB.ShowColumnsInCheckedListBox(WorkingWithDB.selected_table, checkedListBox2);
-            WorkingWithDB.ShowColumnsInListBox(WorkingWithDB.selected_table, listBox3);
-        }
+            WorkingWithDB.GetTableColumns();
+            WorkingWithDB.ShowColumnsInCheckedListBox(checkedListBox2);
+ //           WorkingWithDB.ShowColumnsInListBox(listBox3);
+            WorkingWithDB.ShowColumnsAndRequestsInDataGrid(dataGridView2, row: 0);
 
-
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (checkedListBox1.GetItemChecked(0))                                         // Уникальные строки
-                WorkingWithDB.uniq_strings = "DISTINCT";
-            else
-                WorkingWithDB.uniq_strings = "";
-
-            if (!checkedListBox1.GetItemChecked(1))                                         // Упорядочивание строк в выборке;
-                WorkingWithDB.ordering_string = "";
-            else
-                radioButton5.Enabled = radioButton6.Enabled = true;
-
-            if (!checkedListBox1.GetItemChecked(2))                                         // Сравнение
-                WorkingWithDB.comparison = "";
-            else
-                textBox29.Enabled = true;
-
-            if (!checkedListBox1.GetItemChecked(3))                                         // Попадание в диапазон
-                WorkingWithDB.belonging_to_range = "";
-            else
-                textBox31.Enabled = true;
-
-            if (!checkedListBox1.GetItemChecked(4))                                         // Соответствие шаблону
-                WorkingWithDB.pattern_matching = "";
-            else
-                textBox30.Enabled = true;
-
-            WorkingWithDB.where = (checkedListBox1.GetItemChecked(1)) || (checkedListBox1.GetItemChecked(2)) || (checkedListBox1.GetItemChecked(3)) || (checkedListBox1.GetItemChecked(4))
-                ? "WHERE"
-                : "";
-        }
-
-        private void textBox29_TextChanged(object sender, EventArgs e)
-        {
-            string temp = textBox29.Text;
-            if (!(temp.Contains("=") || temp.Contains(">") || temp.Contains("<") || temp.Contains(">=") || temp.Contains("<=") || temp.Contains("<>")))
-                return;
-            WorkingWithDB.comparison = $"{WorkingWithDB.selected_cond_column}{temp}";
-        }
-
-        private void textBox31_TextChanged(object sender, EventArgs e)
-        {
-            WorkingWithDB.begin = textBox31.Text;
-            textBox32.Enabled = true;
-        }
-
-        private void textBox32_TextChanged(object sender, EventArgs e)
-        {
-            WorkingWithDB.end = textBox32.Text;
-            WorkingWithDB.belonging_to_range = $"{WorkingWithDB.selected_cond_column} BETWEEN '{WorkingWithDB.begin}' AND '{WorkingWithDB.end}'";
-        }
-
-        private void textBox30_TextChanged(object sender, EventArgs e)
-        {
-            string temp = textBox30.Text;
-            if (!(temp.Contains("%") || temp.Contains("_") || temp.Contains("[]") || temp.Contains("[^]")))
-                return;
-            WorkingWithDB.pattern_matching = $"{WorkingWithDB.selected_cond_column} LIKE '{temp}'";
-        }
-
-        private void radioButton5_CheckedChanged(object sender, EventArgs e)
-        {
-            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_cond_column} ASC";
-        }
-
-        private void radioButton6_CheckedChanged(object sender, EventArgs e)
-        {
-            WorkingWithDB.ordering_string = $"ORDER BY {WorkingWithDB.selected_cond_column} DESC";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            WorkingWithDB.SelectRequestToListBox(listBox1);
-            button6.Enabled = false;
+            WorkingWithDB.FinalRequest(dataGridView2, listBox1);
+         //   WorkingWithDB.SelectRequestToListBox(listBox1);
+         //   button6.Enabled = false;
         }
 
         private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -919,14 +852,11 @@ namespace RLS
                 button6.Enabled = true;
         }
 
-        private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
+        private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            WorkingWithDB.ShowColumnsAndRequestsInDataGrid(dataGridView2, dataGridView2.Rows.Count-1);
         }
 
-        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            WorkingWithDB.selected_cond_column = listBox3.SelectedItem.ToString();
-        }
     }
 }

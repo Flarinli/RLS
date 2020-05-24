@@ -3,6 +3,9 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System;
 using System.Windows.Forms;
+using System.Linq.Expressions;
+using System.CodeDom.Compiler;
+using System.Linq;
 
 namespace RLS
 {
@@ -14,21 +17,13 @@ namespace RLS
         static string experimentID;
         public static string CurID { get { return curID; } }
         public static string ExperimentID { get { return experimentID; } }
+        private static readonly List<string> types_of_requests = new List<string>() { "Сравнение", "Попадание в диапазон", "Соответствие шаблону"};
 
-        public static string DB_request_string = "";
+
         public static string selected_table = "";
+        public static List<string> table_columns;
         public static List<string> selected_columns = new List<string>();
-        public static string selected_colums_string = "";
         public static string selected_cond_column = "";
-        public static string uniq_strings = "";
-        public static string ordering_string = "";
-        public static string where = "";
-        public static string comparison = "";
-        public static string value = "";
-        public static string belonging_to_range = "";
-        public static string begin;
-        public static string end;
-        public static string pattern_matching = "";
 
 
         public static async void Insert(string table, List<string> columns, List<string> values)
@@ -56,15 +51,15 @@ namespace RLS
             sqlConnection.Close();
         }
 
-        public static async void ShowTablesInListBox(ListBox listBox)
+        public static void ShowTablesInListBox(ListBox listBox)
         {
             SqlConnection sqlConnection = new SqlConnection(connection_string);
             sqlConnection.Open();
 
             SqlDataReader sqlDataReader = null;
             sqlCommand = new SqlCommand("SELECT * FROM INFORMATION_SCHEMA.TABLES", sqlConnection);
-            sqlDataReader = await sqlCommand.ExecuteReaderAsync();
-            while (await sqlDataReader.ReadAsync())
+            sqlDataReader = sqlCommand.ExecuteReader();
+            while (sqlDataReader.Read())
             {
                 string table = sqlDataReader[2].ToString();
                 if(table != "sysdiagrams")
@@ -73,71 +68,100 @@ namespace RLS
             sqlConnection.Close();
         }
 
-        public static async void ShowColumnsInListBox(string table_name, ListBox listBox)
+        public static void GetTableColumns()
         {
             SqlConnection sqlConnection = new SqlConnection(connection_string);
-            await sqlConnection.OpenAsync();
+            sqlConnection.Open();
 
             SqlDataReader sqlDataReader = null;
-            sqlCommand = new SqlCommand($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table_name}'", sqlConnection);
-            sqlDataReader = await sqlCommand.ExecuteReaderAsync();
-            
+            sqlCommand = new SqlCommand($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{selected_table}'", sqlConnection);
+            sqlDataReader = sqlCommand.ExecuteReader();
+            table_columns = new List<string>();
+            while (sqlDataReader.Read())
+            {
+                table_columns.Add(sqlDataReader[0].ToString());
+            }
+            sqlConnection.Close();
+        }
+
+        public static void ShowColumnsInListBox(ListBox listBox)
+        {
             listBox.Items.Clear();
-            while (await sqlDataReader.ReadAsync())
-            {
-                string table = sqlDataReader[0].ToString();
-                listBox.Items.Add(table);
-            }
-            sqlConnection.Close();
+            foreach (string column in table_columns) listBox.Items.Add(column);
         }
 
-        public static async void ShowColumnsInCheckedListBox(string table_name, CheckedListBox checkedList)
+        public static void ShowColumnsInCheckedListBox(CheckedListBox checkedList)
         {
-            SqlConnection sqlConnection = new SqlConnection(connection_string);
-            await sqlConnection.OpenAsync();
-
-            SqlDataReader sqlDataReader = null;
-            sqlCommand = new SqlCommand($"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table_name}'", sqlConnection);
-            sqlDataReader = await sqlCommand.ExecuteReaderAsync();
-
             checkedList.Items.Clear();
-            while (await sqlDataReader.ReadAsync())
-            {
-                string table = sqlDataReader[0].ToString();
-                checkedList.Items.Add(table);
-            }
-            sqlConnection.Close();
+            foreach(string column in table_columns) checkedList.Items.Add(column);
+        }
+ 
+        public static void ShowColumnsAndRequestsInDataGrid(DataGridView dataGridView, int row)
+        {   
+            DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
+            foreach(string column in table_columns) dcombo.Items.Add(column);
+            dataGridView.Rows[row].Cells[0] = dcombo;
+
+            dcombo = new DataGridViewComboBoxCell();
+            foreach(string type in types_of_requests) dcombo.Items.Add(type);
+            dataGridView.Rows[row].Cells[1] = dcombo;
         }
 
-        public static void ClearRequestsData()
+            public static void ClearRequestsData()
         {
             selected_table = "";
             selected_columns.Clear();
-            selected_colums_string = "";
             selected_cond_column = "";
-            uniq_strings = "";
-            ordering_string = "";
-            where = "";
-            comparison = "";
-            value = "";
-            belonging_to_range = "";
-            pattern_matching = "";
         }
 
-        public static async void SelectRequestToListBox(ListBox listBox)
+
+        public static void FinalRequest(DataGridView dataGrid, ListBox listBox)
         {
-            selected_colums_string = string.Join(",", selected_columns.ToArray());
-            DB_request_string = $"SELECT {uniq_strings} {selected_colums_string} FROM {selected_table} {where} {pattern_matching} {comparison} {belonging_to_range}{ordering_string}";
-            MessageBox.Show(DB_request_string);
+            string req_str =  $"SELECT {string.Join(",", selected_columns.ToArray())} FROM {selected_table} ";
+            if (dataGrid.Rows.Count != 1)
+                req_str += "WHERE\n";
+            for (int i = 0; i < (dataGrid.Rows.Count - 1); ++i)
+            {
+                string column = dataGrid.Rows[i].Cells[0].Value.ToString();
+                string condition = dataGrid.Rows[i].Cells[1].Value.ToString();
+                string value = dataGrid.Rows[i].Cells[2].Value.ToString();
+                switch (condition)
+                {                        
+                    case "Сравнение":
+                        {
+                            if (!(value.Contains("=") || value.Contains(">") || value.Contains("<") || value.Contains(">=") || value.Contains("<=") || value.Contains("<>")))
+                                break;
+                            req_str += $"{column} {value} ";
+                            break;
+                        }
+                        
+                    case "Попадание в диапазон":
+                        {
+                            string [] range = value.Split(' ');
+                            req_str += $"{column} BETWEEN {range[0]} AND {range[1]} ";
+                            break;
+                        }
+                    case "Соответствие шаблону":
+                        {
+                            if (!(value.Contains("%") || value.Contains("_") || value.Contains("[]") || value.Contains("[^]")))
+                                break;
+                            req_str += $"{column} LIKE '{value}' ";
+                            break;
+                        }
+                }
+                if (i != dataGrid.Rows.Count - 2)
+                    req_str += "\n AND ";
+            }
+
             SqlConnection sqlConnection = new SqlConnection(connection_string);
-            await sqlConnection.OpenAsync();
-        
+            sqlConnection.Open();
+
             SqlDataReader sqlDataReader = null;
-            sqlCommand = new SqlCommand(DB_request_string, sqlConnection);
-            sqlDataReader = await sqlCommand.ExecuteReaderAsync();
+            sqlCommand = new SqlCommand(req_str, sqlConnection);
+            sqlDataReader = sqlCommand.ExecuteReader();
             listBox.Items.Clear();
             listBox.Items.Add(string.Join("\t", selected_columns.ToArray()));
-            while (await sqlDataReader.ReadAsync())
+            while (sqlDataReader.Read())
             {
                 string temp = "";
                 for (int i = 0; i < sqlDataReader.FieldCount; ++i)
@@ -147,7 +171,6 @@ namespace RLS
             ClearRequestsData();
             sqlConnection.Close();
         }
-
     }
 
 }
