@@ -831,16 +831,13 @@ namespace RLS
             WorkingWithDB.selected_table = listBox2.SelectedItem.ToString();
             WorkingWithDB.GetTableColumns();
             WorkingWithDB.ShowColumnsInCheckedListBox(checkedListBox2);
- //           WorkingWithDB.ShowColumnsInListBox(listBox3);
             WorkingWithDB.ShowColumnsAndRequestsInDataGrid(dataGridView2, row: 0);
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            WorkingWithDB.FinalRequest(dataGridView2, listBox1);
-         //   WorkingWithDB.SelectRequestToListBox(listBox1);
-         //   button6.Enabled = false;
+            WorkingWithDB.FinalRequest(dataGridView2, dataGridView3);
         }
 
         private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)

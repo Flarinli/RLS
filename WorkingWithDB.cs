@@ -3,9 +3,6 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System;
 using System.Windows.Forms;
-using System.Linq.Expressions;
-using System.CodeDom.Compiler;
-using System.Linq;
 
 namespace RLS
 {
@@ -115,7 +112,7 @@ namespace RLS
         }
 
 
-        public static void FinalRequest(DataGridView dataGrid, ListBox listBox)
+        public static void FinalRequest(DataGridView dataGrid, DataGridView outDataGrid)
         {
             string req_str =  $"SELECT {string.Join(",", selected_columns.ToArray())} FROM {selected_table} ";
             if (dataGrid.Rows.Count != 1)
@@ -159,14 +156,23 @@ namespace RLS
             SqlDataReader sqlDataReader = null;
             sqlCommand = new SqlCommand(req_str, sqlConnection);
             sqlDataReader = sqlCommand.ExecuteReader();
-            listBox.Items.Clear();
-            listBox.Items.Add(string.Join("\t", selected_columns.ToArray()));
+
+            outDataGrid.Rows.Clear();
+            outDataGrid.Columns.Clear();
+            for (int i = 0; i < selected_columns.Count; ++i)
+            {
+                outDataGrid.Columns.Add(selected_columns[i], selected_columns[i]);
+                outDataGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            int row_number = 0;
             while (sqlDataReader.Read())
             {
-                string temp = "";
+                outDataGrid.Rows.Add();
                 for (int i = 0; i < sqlDataReader.FieldCount; ++i)
-                    temp += sqlDataReader[i].ToString() + "\t";
-                listBox.Items.Add(temp);
+                {
+                    outDataGrid[i, row_number].Value = sqlDataReader[i].ToString();
+                }
+                ++row_number;
             }
             ClearRequestsData();
             sqlConnection.Close();
