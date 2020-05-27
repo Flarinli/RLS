@@ -119,20 +119,19 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.Column11 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox40 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
             this.button6 = new System.Windows.Forms.Button();
-            this.groupBox35 = new System.Windows.Forms.GroupBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column14 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -196,12 +195,10 @@
             this.tabPage3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.groupBox40.SuspendLayout();
-            this.groupBox35.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -1308,9 +1305,7 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.dataGridView2);
-            this.tabPage5.Controls.Add(this.groupBox40);
             this.tabPage5.Controls.Add(this.button6);
-            this.tabPage5.Controls.Add(this.groupBox35);
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -1319,91 +1314,15 @@
             this.tabPage5.Text = "Действия";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column11,
-            this.Column12,
-            this.Column13});
-            this.dataGridView2.Location = new System.Drawing.Point(398, 9);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersWidth = 62;
-            this.dataGridView2.RowTemplate.Height = 28;
-            this.dataGridView2.Size = new System.Drawing.Size(922, 539);
-            this.dataGridView2.TabIndex = 23;
-            this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
-            // 
-            // Column11
-            // 
-            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column11.HeaderText = "Поле";
-            this.Column11.MinimumWidth = 8;
-            this.Column11.Name = "Column11";
-            // 
-            // Column12
-            // 
-            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column12.HeaderText = "Тип условия";
-            this.Column12.MinimumWidth = 8;
-            this.Column12.Name = "Column12";
-            // 
-            // Column13
-            // 
-            this.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column13.HeaderText = "Значение";
-            this.Column13.MinimumWidth = 8;
-            this.Column13.Name = "Column13";
-            // 
-            // groupBox40
-            // 
-            this.groupBox40.Controls.Add(this.checkedListBox2);
-            this.groupBox40.Location = new System.Drawing.Point(202, 9);
-            this.groupBox40.Name = "groupBox40";
-            this.groupBox40.Size = new System.Drawing.Size(190, 153);
-            this.groupBox40.TabIndex = 22;
-            this.groupBox40.TabStop = false;
-            this.groupBox40.Text = "Выбор полей";
-            // 
-            // checkedListBox2
-            // 
-            this.checkedListBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBox2.Location = new System.Drawing.Point(3, 22);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(184, 128);
-            this.checkedListBox2.TabIndex = 0;
-            this.checkedListBox2.SelectedIndexChanged += new System.EventHandler(this.checkedListBox2_SelectedIndexChanged);
-            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(9, 168);
+            this.button6.Location = new System.Drawing.Point(1246, 6);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(380, 383);
+            this.button6.Size = new System.Drawing.Size(380, 542);
             this.button6.TabIndex = 20;
             this.button6.Text = "Сделать запрос";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // groupBox35
-            // 
-            this.groupBox35.Controls.Add(this.listBox2);
-            this.groupBox35.Location = new System.Drawing.Point(6, 6);
-            this.groupBox35.Name = "groupBox35";
-            this.groupBox35.Size = new System.Drawing.Size(190, 156);
-            this.groupBox35.TabIndex = 18;
-            this.groupBox35.TabStop = false;
-            this.groupBox35.Text = "Выбор таблицы";
-            // 
-            // listBox2
-            // 
-            this.listBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 20;
-            this.listBox2.Location = new System.Drawing.Point(3, 22);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(184, 131);
-            this.listBox2.TabIndex = 12;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // tabPage4
             // 
@@ -1415,6 +1334,20 @@
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Данные";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView3.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.RowHeadersWidth = 62;
+            this.dataGridView3.RowTemplate.Height = 28;
+            this.dataGridView3.Size = new System.Drawing.Size(1632, 551);
+            this.dataGridView3.TabIndex = 1;
             // 
             // tableLayoutPanel4
             // 
@@ -1454,19 +1387,71 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dataGridView3
+            // dataGridView2
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.RowHeadersWidth = 62;
-            this.dataGridView3.RowTemplate.Height = 28;
-            this.dataGridView3.Size = new System.Drawing.Size(1632, 551);
-            this.dataGridView3.TabIndex = 1;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column14,
+            this.Column16,
+            this.Column15,
+            this.Column11,
+            this.Column12,
+            this.Column13});
+            this.dataGridView2.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 62;
+            this.dataGridView2.RowTemplate.Height = 28;
+            this.dataGridView2.Size = new System.Drawing.Size(1234, 539);
+            this.dataGridView2.TabIndex = 23;
+            this.dataGridView2.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
+            this.dataGridView2.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView2_RowsAdded);
+            // 
+            // Column14
+            // 
+            this.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column14.HeaderText = "Таблица";
+            this.Column14.MinimumWidth = 8;
+            this.Column14.Name = "Column14";
+            this.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "Выборочные столбцы";
+            this.Column16.MinimumWidth = 8;
+            this.Column16.Name = "Column16";
+            this.Column16.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column16.Width = 150;
+            // 
+            // Column15
+            // 
+            this.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column15.HeaderText = "Тип соединения";
+            this.Column15.MinimumWidth = 8;
+            this.Column15.Name = "Column15";
+            this.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Column11
+            // 
+            this.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column11.HeaderText = "Поле";
+            this.Column11.MinimumWidth = 8;
+            this.Column11.Name = "Column11";
+            // 
+            // Column12
+            // 
+            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column12.HeaderText = "Тип условия";
+            this.Column12.MinimumWidth = 8;
+            this.Column12.Name = "Column12";
+            // 
+            // Column13
+            // 
+            this.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column13.HeaderText = "Значение";
+            this.Column13.MinimumWidth = 8;
+            this.Column13.Name = "Column13";
             // 
             // RLS_Form
             // 
@@ -1570,12 +1555,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.groupBox40.ResumeLayout(false);
-            this.groupBox35.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1677,16 +1660,15 @@
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.GroupBox groupBox35;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.GroupBox groupBox40;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.DataGridView dataGridView3;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column15;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column11;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridView dataGridView3;
     }
 }
 

@@ -103,7 +103,8 @@ namespace RLS
             List<string> columns = new List<string>() { "Date", "Time", "Comment" };
             List<string> values = new List<string>() { now.ToString("d"), now.ToString("T"), "None" };
             WorkingWithDB.Insert("Experiments", columns, values);
-            WorkingWithDB.ShowTablesInListBox(listBox2);
+            WorkingWithDB.ShowTablesInDataGridView(dataGridView2, 0);
+  //          WorkingWithDB.ShowTablesInListBox(listBox2);
 
             dataGridView1.RowCount = Simulator.NUMBER + CommandPost.NUMBER;
 
@@ -824,35 +825,21 @@ namespace RLS
             Application.Exit();
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (dataGridView2.Rows.Count != 1)
-                dataGridView2.Rows.Clear();
-            WorkingWithDB.selected_table = listBox2.SelectedItem.ToString();
-            WorkingWithDB.GetTableColumns();
-            WorkingWithDB.ShowColumnsInCheckedListBox(checkedListBox2);
-            WorkingWithDB.ShowColumnsAndRequestsInDataGrid(dataGridView2, row: 0);
-
-        }
 
         private void button6_Click(object sender, EventArgs e)
         {
             WorkingWithDB.FinalRequest(dataGridView2, dataGridView3);
         }
 
-        private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            WorkingWithDB.selected_columns.Clear();
-            foreach (string selected_column in checkedListBox2.CheckedItems)
-                WorkingWithDB.selected_columns.Add(selected_column);
-            if (!(checkedListBox2.CheckedItems == null))
-                button6.Enabled = true;
-        }
-
-
         private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            WorkingWithDB.ShowColumnsAndRequestsInDataGrid(dataGridView2, dataGridView2.Rows.Count-1);
+            WorkingWithDB.ShowTablesInDataGridView(dataGridView2, dataGridView2.Rows.Count - 1);
+        }
+
+        private void dataGridView2_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+                WorkingWithDB.UpdateDataGridRow(dataGridView2, e.RowIndex);
         }
 
     }

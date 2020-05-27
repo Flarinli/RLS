@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System;
 using System.Windows.Forms;
+using System.Linq;
+using System.CodeDom.Compiler;
 
 namespace RLS
 {
@@ -18,9 +20,15 @@ namespace RLS
 
 
         public static string selected_table = "";
+        public static List<string> joining_tables = new List<string>();
+        public static List<string> joining_columns = new List<string>();
         public static List<string> table_columns;
         public static List<string> selected_columns = new List<string>();
         public static string selected_cond_column = "";
+        private static List<string> selected_types_of_join = new List<string>();
+        private static readonly List<string> types_of_join = new List<string>() {"Join On", "Left Join On", "Right Join On"};
+        private static string first_join_word = "";
+        private static string second_join_word = "";
 
 
         public static async void Insert(string table, List<string> columns, List<string> values)
@@ -48,7 +56,7 @@ namespace RLS
             sqlConnection.Close();
         }
 
-        public static void ShowTablesInListBox(ListBox listBox)
+        public static void ShowTablesInDataGridView(DataGridView dataGridView, int row)
         {
             SqlConnection sqlConnection = new SqlConnection(connection_string);
             sqlConnection.Open();
@@ -56,13 +64,16 @@ namespace RLS
             SqlDataReader sqlDataReader = null;
             sqlCommand = new SqlCommand("SELECT * FROM INFORMATION_SCHEMA.TABLES", sqlConnection);
             sqlDataReader = sqlCommand.ExecuteReader();
+
+            DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
             while (sqlDataReader.Read())
             {
                 string table = sqlDataReader[2].ToString();
                 if(table != "sysdiagrams")
-                    listBox.Items.Add(sqlDataReader[2]);
+                    dcombo.Items.Add(sqlDataReader[2]);
             }
             sqlConnection.Close();
+            dataGridView.Rows[row].Cells[0] = dcombo;
         }
 
         public static void GetTableColumns()
@@ -81,32 +92,36 @@ namespace RLS
             sqlConnection.Close();
         }
 
-        public static void ShowColumnsInListBox(ListBox listBox)
+        public static void UpdateDataGridRow(DataGridView dataGridView, int row)
         {
-            listBox.Items.Clear();
-            foreach (string column in table_columns) listBox.Items.Add(column);
-        }
+            selected_table = dataGridView.Rows[row].Cells[0].Value.ToString();
 
-        public static void ShowColumnsInCheckedListBox(CheckedListBox checkedList)
-        {
-            checkedList.Items.Clear();
-            foreach(string column in table_columns) checkedList.Items.Add(column);
-        }
- 
-        public static void ShowColumnsAndRequestsInDataGrid(DataGridView dataGridView, int row)
-        {   
-            DataGridViewComboBoxCell dcombo = new DataGridViewComboBoxCell();
-            foreach(string column in table_columns) dcombo.Items.Add(column);
-            dataGridView.Rows[row].Cells[0] = dcombo;
+            GetTableColumns();
+
+            DataGridViewComboBoxCell dcombo;
 
             dcombo = new DataGridViewComboBoxCell();
-            foreach(string type in types_of_requests) dcombo.Items.Add(type);
+            foreach (string column in table_columns) dcombo.Items.Add(column);
             dataGridView.Rows[row].Cells[1] = dcombo;
+
+            dcombo = new DataGridViewComboBoxCell();
+            foreach (string type in types_of_join) dcombo.Items.Add(type);
+            dataGridView.Rows[row].Cells[2] = dcombo;
+
+            dcombo = new DataGridViewComboBoxCell();
+            foreach (string column in table_columns) dcombo.Items.Add(column);
+            dataGridView.Rows[row].Cells[3] = dcombo;
+
+            dcombo = new DataGridViewComboBoxCell();
+            foreach (string type in types_of_requests) dcombo.Items.Add(type);
+            dataGridView.Rows[row].Cells[4] = dcombo;
         }
 
-            public static void ClearRequestsData()
+        public static void ClearRequestsData()
         {
             selected_table = "";
+            joining_tables.Clear();
+            joining_columns.Clear();
             selected_columns.Clear();
             selected_cond_column = "";
         }
@@ -114,14 +129,91 @@ namespace RLS
 
         public static void FinalRequest(DataGridView dataGrid, DataGridView outDataGrid)
         {
-            string req_str =  $"SELECT {string.Join(",", selected_columns.ToArray())} FROM {selected_table} ";
+            for (int i = 0; i < dataGrid.Rows.Count - 1; ++i)
+            {
+                if (dataGrid.Rows[i].Cells[0].Value != null)
+                {
+                    joining_tables.Add(dataGrid.Rows[i].Cells[0].Value.ToString());
+                }
+
+                if (dataGrid.Rows[i].Cells[1].Value != null)
+                {
+                    joining_columns.Add(dataGrid.Rows[i].Cells[1].Value.ToString());
+                }
+                if (dataGrid.Rows[i].Cells[2].Value != null)
+                    selected_types_of_join.Add(dataGrid.Rows[i].Cells[2].Value.ToString());
+          
+                if (dataGrid.Rows[i].Cells[3].Value != null)
+                    selected_columns.Add(dataGrid.Rows[i].Cells[3].Value.ToString());
+            }
+
+            string req_str = "";
+            if (joining_tables.Count > 1)
+            {
+
+                for (int i = 0, j = 0; i < joining_tables.Count(); ++i, ++j)
+                {
+
+                    string type = selected_types_of_join[j];
+                    switch (type)
+                    {
+                        case "Join On":
+                            {
+                                first_join_word = "JOIN";
+                                second_join_word = "ON";
+                                break;
+                            }
+                        case "Left Join On":
+                            {
+                                first_join_word = "LEFT JOIN";
+                                second_join_word = "ON";
+                                break;
+                            }
+
+                        case "Right Join On":
+                            {
+                                first_join_word = "RIGHT JOIN";
+                                second_join_word = "ON";
+                                break;
+                            }
+                    }
+                    if (i == 0)
+                    {
+                        req_str += "SELECT ";
+                        for (int c = 0; c < joining_tables.Count; ++c)
+                        {
+                            req_str += $"{joining_tables[c]}.{selected_columns[c]}";
+                            if (c != joining_columns.Count - 1)
+                                req_str += ", ";
+                            else
+                                req_str += " ";
+                        }
+                        req_str += $"FROM {joining_tables[i]} {first_join_word} {joining_tables[i + 1]} {second_join_word} ({joining_tables[i]}.{joining_columns[i]} = {joining_tables[i + 1]}.{joining_columns[i + 1]}) ";
+                    }
+                    else if (i != joining_tables.Count-1)
+                    {
+                        req_str += $"{first_join_word} {joining_tables[i]} {second_join_word} ({joining_tables[i - 1]}.{joining_columns[i - 1]} = {joining_tables[i]}.{joining_columns[i]}) ";
+                    }
+                        
+                }
+            }
+            else
+            {
+                req_str = $"SELECT {string.Join(",", selected_columns.ToArray())} FROM {joining_tables[0]} ";
+            }
             if (dataGrid.Rows.Count != 1)
                 req_str += "WHERE\n";
             for (int i = 0; i < (dataGrid.Rows.Count - 1); ++i)
             {
-                string column = dataGrid.Rows[i].Cells[0].Value.ToString();
-                string condition = dataGrid.Rows[i].Cells[1].Value.ToString();
-                string value = dataGrid.Rows[i].Cells[2].Value.ToString();
+                string column = "";
+                string condition = "";
+                string value = "";
+                if (dataGrid.Rows[i].Cells[3].Value != null)
+                    column = dataGrid.Rows[i].Cells[3].Value.ToString();
+                if (dataGrid.Rows[i].Cells[4].Value != null)
+                    condition = dataGrid.Rows[i].Cells[4].Value.ToString();
+                if (dataGrid.Rows[i].Cells[5].Value != null)
+                    value = dataGrid.Rows[i].Cells[5].Value.ToString();
                 switch (condition)
                 {                        
                     case "Сравнение":
@@ -149,6 +241,7 @@ namespace RLS
                 if (i != dataGrid.Rows.Count - 2)
                     req_str += "\n AND ";
             }
+            MessageBox.Show(req_str);
 
             SqlConnection sqlConnection = new SqlConnection(connection_string);
             sqlConnection.Open();
@@ -177,6 +270,8 @@ namespace RLS
             ClearRequestsData();
             sqlConnection.Close();
         }
+
+        
     }
 
 }
